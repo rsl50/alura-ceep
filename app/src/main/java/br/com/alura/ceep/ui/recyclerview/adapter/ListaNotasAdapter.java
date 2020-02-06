@@ -2,6 +2,7 @@ package br.com.alura.ceep.ui.recyclerview.adapter;
 
 import android.content.Context;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ public class ListaNotasAdapter extends RecyclerView.Adapter {
 
     private final List<Nota> notas;
     private final Context context;
+    private static int quantidadeViewCriada;
+    private static int quantidadeBindView;
 
     public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
@@ -27,13 +30,15 @@ public class ListaNotasAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        quantidadeViewCriada++;
         View viewCriada = LayoutInflater.from(context).inflate(R.layout.item_nota, parent, false);
-
+        Log.d("recyclerView adapter", "view holder criado " + quantidadeViewCriada);
         return new NotaViewHolder(viewCriada);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        quantidadeBindView++;
         Nota nota = notas.get(position);
 
         TextView titulo = holder.itemView.findViewById(R.id.item_nota_titulo);
@@ -41,6 +46,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter {
 
         TextView descricao = holder.itemView.findViewById(R.id.item_nota_descricao);
         descricao.setText(nota.getDescricao());
+        Log.d("recyclerView adapter", "bind: posicao " + position + " quandidade " + quantidadeBindView);
     }
 
     @Override
