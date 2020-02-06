@@ -5,6 +5,7 @@ import android.os.Bundle;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.R;
 import br.com.alura.ceep.dao.NotaDAO;
@@ -27,6 +28,8 @@ public class ListaNotasActivity extends AppCompatActivity {
         }
 
         List<Nota> todasNotas = dao.todos();
-        listaNotas.setAdapter(new ListaNotasAdapter(todasNotas));
+        listaNotas.setAdapter(new ListaNotasAdapter(this, todasNotas));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        listaNotas.setLayoutManager(layoutManager);
     }
 }
