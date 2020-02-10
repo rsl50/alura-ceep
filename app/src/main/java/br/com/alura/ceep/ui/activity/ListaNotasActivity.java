@@ -28,7 +28,7 @@ public class ListaNotasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent iniciaFormularioNota = new Intent(ListaNotasActivity.this, FormularioNotaActivity.class);
-                startActivity(iniciaFormularioNota);
+                startActivity(iniciaFormularioNota );
             }
         });
     }
