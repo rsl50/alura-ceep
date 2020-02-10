@@ -1,8 +1,6 @@
 package br.com.alura.ceep.ui.recyclerview.adapter;
 
 import android.content.Context;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +17,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     private final List<Nota> notas;
     private final Context context;
-    private static int quantidadeViewCriada;
-    private static int quantidadeBindView;
 
     public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
@@ -56,6 +52,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         }
 
         public void vincula (Nota nota) {
+            preencheCampos(nota);
+        }
+
+        private void preencheCampos(Nota nota) {
             titulo.setText(nota.getTitulo());
             descricao.setText(nota.getDescricao());
         }
