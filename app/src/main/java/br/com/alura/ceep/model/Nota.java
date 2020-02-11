@@ -1,8 +1,9 @@
 package br.com.alura.ceep.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Nota implements Serializable {
+public class Nota implements Parcelable {
 
     private final String titulo;
     private final String descricao;
@@ -12,6 +13,23 @@ public class Nota implements Serializable {
         this.descricao = descricao;
     }
 
+    private Nota (Parcel from) {
+        titulo = from.readString();
+        descricao = from.readString();
+    }
+
+    public static final Parcelable.Creator<Nota>
+            CREATOR = new Parcelable.Creator<Nota>() {
+
+        public Nota createFromParcel(Parcel in) {
+            return new Nota(in);
+        }
+
+        public Nota[] newArray(int size) {
+            return new Nota[size];
+        }
+    };
+
     public String getTitulo() {
         return titulo;
     }
@@ -20,4 +38,14 @@ public class Nota implements Serializable {
         return descricao;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(titulo);
+        dest.writeString(descricao);
+    }
 }

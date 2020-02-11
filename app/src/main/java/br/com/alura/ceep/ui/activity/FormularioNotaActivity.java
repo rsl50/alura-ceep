@@ -9,7 +9,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.alura.ceep.R;
-import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.model.Nota;
 
 public class FormularioNotaActivity extends AppCompatActivity {
@@ -33,10 +32,10 @@ public class FormularioNotaActivity extends AppCompatActivity {
             EditText descricao = findViewById(R.id.formulario_nota_descricao);
 
             Nota notaCriada = new Nota(titulo.getText().toString(), descricao.getText().toString());
-            Intent intent = new Intent();
-            intent.putExtra("nota", notaCriada);
+            Intent resultadoInsercao  = new Intent();
+            resultadoInsercao.putExtra("nota", notaCriada);
+            setResult(2, resultadoInsercao);
 
-            setResult(2, intent);
             finish();
         }
         return super.onOptionsItemSelected(item);
