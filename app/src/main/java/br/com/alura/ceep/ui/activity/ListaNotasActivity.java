@@ -16,11 +16,14 @@ import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
 
 public class ListaNotasActivity extends AppCompatActivity {
 
+    private List<Nota> todasNotas;
+    private ListaNotasAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_notas);
-        List<Nota> todasNotas = notasDeExemplo();
+        todasNotas = notasDeExemplo();
         configuraRecyclerView(todasNotas);
 
         TextView botaoInsereNota = findViewById(R.id.lista_notas_insere_nota);
@@ -36,8 +39,9 @@ public class ListaNotasActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         NotaDAO dao = new NotaDAO();
-        List<Nota> todasNotas = dao.todos();
-        configuraRecyclerView(todasNotas);
+        todasNotas.clear();
+        todasNotas.addAll(dao.todos());
+        adapter.notifyDataSetChanged();
         super.onResume();
     }
 
@@ -47,7 +51,8 @@ public class ListaNotasActivity extends AppCompatActivity {
     }
 
     private void configuraAdapter(List<Nota> todasNotas, RecyclerView listaNotas) {
-        listaNotas.setAdapter(new ListaNotasAdapter(this, todasNotas));
+        adapter = new ListaNotasAdapter(this, todasNotas);
+        listaNotas.setAdapter(adapter);
     }
 
     private List<Nota> notasDeExemplo() {
