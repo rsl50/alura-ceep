@@ -15,11 +15,12 @@ import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
 
+import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.CHAVE_NOTA;
+import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.CODIGO_REQUISICAO_INSERE_NOTA;
+import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.CODIGO_RESULTADO_NOTA_CRIADA;
+
 public class ListaNotasActivity extends AppCompatActivity {
 
-    public static final int CODIGO_REQUISICAO_INSERE_NOTA = 1;
-    public static final int CODIGO_RESULTADO_NOTA_CRIADA = 2;
-    public static final String CAHVE_NOTA = "nota";
     private ListaNotasAdapter adapter;
 
     @Override
@@ -69,7 +70,7 @@ public class ListaNotasActivity extends AppCompatActivity {
     }
 
     private boolean temNota(@Nullable Intent data) {
-        return data.hasExtra(CAHVE_NOTA);
+        return data.hasExtra(CHAVE_NOTA);
     }
 
     private boolean ehCodigoResultadoNotaCriada(int resultCode) {
