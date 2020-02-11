@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.R;
@@ -31,18 +32,20 @@ public class ListaNotasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent iniciaFormularioNota = new Intent(ListaNotasActivity.this, FormularioNotaActivity.class);
-                startActivity(iniciaFormularioNota );
+                startActivityForResult(iniciaFormularioNota, 1);
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        NotaDAO dao = new NotaDAO();
-        todasNotas.clear();
-        todasNotas.addAll(dao.todos());
-        adapter.notifyDataSetChanged();
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 1 && resultCode == 2 && data.hasExtra("nota")) {
+            Nota notaRecebida = (Nota) data.getSerializableExtra("nota");
+            new NotaDAO().insere(notaRecebida);
+            adapter.adiciona(notaRecebida);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void configuraRecyclerView(List<Nota> todasNotas) {
