@@ -1,7 +1,6 @@
 package br.com.alura.ceep.ui.recyclerview.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     private final List<Nota> notas;
     private final Context context;
-    private int quantidadeViewHolder = 0;
 
     public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
@@ -28,9 +26,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
     @NonNull
     @Override
     public ListaNotasAdapter.NotaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        quantidadeViewHolder++;
         View viewCriada = LayoutInflater.from(context).inflate(R.layout.item_nota, parent, false);
-        Log.i("recyclerView adapter", "quantidade view holder: " + quantidadeViewHolder);
         return new NotaViewHolder(viewCriada);
     }
 
