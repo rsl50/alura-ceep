@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,15 @@ public class FormularioNotaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_nota);
+
+        Intent dadosRecebidos = getIntent();
+        if (dadosRecebidos.hasExtra(CHAVE_NOTA)) {
+            Nota notaRecebida = dadosRecebidos.getParcelableExtra(CHAVE_NOTA);
+            TextView titulo = findViewById(R.id.formulario_nota_titulo);
+            TextView descricao = findViewById(R.id.formulario_nota_descricao);
+            titulo.setText(notaRecebida.getTitulo());
+            descricao.setText(notaRecebida.getDescricao());
+        }
     }
 
     @Override
