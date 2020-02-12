@@ -18,6 +18,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     private final List<Nota> notas;
     private final Context context;
+    private OnItemClickListener onItemClickListener;
 
     public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
@@ -47,9 +48,14 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     class NotaViewHolder extends RecyclerView.ViewHolder {
         private final TextView titulo;
         private final TextView descricao;
+
 
         public NotaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,12 +65,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "ViewHolder tocado", Toast.LENGTH_LONG).show();
+                    onItemClickListener.onItemClick();
                 }
             });
         }
-
-
 
         public void vincula (Nota nota) {
             preencheCampos(nota);
