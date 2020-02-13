@@ -16,6 +16,7 @@ import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
 import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemClickListener;
+import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemLongClickListener;
 
 
 import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.CHAVE_NOTA;
@@ -109,6 +110,17 @@ public class ListaNotasActivity extends AppCompatActivity {
                 abreFormularioComNota.putExtra(CHAVE_NOTA, nota);
                 abreFormularioComNota.putExtra("posicao", posicao);
                 startActivityForResult(abreFormularioComNota, 2);
+            }
+        });
+
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(Nota nota, int posicao) {
+                Intent abreFormularioComNota = new Intent(ListaNotasActivity.this, FormularioNotaActivity.class);
+                abreFormularioComNota.putExtra(CHAVE_NOTA, nota);
+                abreFormularioComNota.putExtra("posicao", posicao);
+                //startActivityForResult(abreFormularioComNota, 2);
+                Toast.makeText(ListaNotasActivity.this, nota.getDescricao(), Toast.LENGTH_SHORT).show();
             }
         });
     }

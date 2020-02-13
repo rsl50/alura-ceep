@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -14,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.R;
 import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemClickListener;
+import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemLongClickListener;
 
 public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.NotaViewHolder> {
 
     private final List<Nota> notas;
     private final Context context;
     private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
 
     public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
@@ -58,6 +59,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         this.onItemClickListener = onItemClickListener;
     }
 
+    public void setOnItemLongClickListener (OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
     class NotaViewHolder extends RecyclerView.ViewHolder {
         private final TextView titulo;
         private final TextView descricao;
@@ -72,6 +77,14 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
                 @Override
                 public void onClick(View v) {
                     onItemClickListener.onItemClick(nota, getAdapterPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemLongClickListener.onItemLongClick(nota, getAdapterPosition());
+                    return true;
                 }
             });
         }
