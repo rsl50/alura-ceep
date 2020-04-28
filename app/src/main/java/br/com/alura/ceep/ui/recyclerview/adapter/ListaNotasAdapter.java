@@ -16,6 +16,11 @@ import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemClickListener;
 import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemLongClickListener;
 
+/*
+    Outras animações no adapter
+    https://cursos.alura.com.br/course/recyclerview-listeners-animacoes/task/36796
+ */
+
 public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.NotaViewHolder> {
 
     private final List<Nota> notas;
@@ -53,7 +58,9 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     public void altera (int posicao, Nota nota) {
         notas.set(posicao, nota);
-        notifyDataSetChanged();
+
+        //Adiciona efeito de transição/animação ao alterar item da lista
+        notifyItemChanged(posicao);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -64,14 +71,18 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         this.onItemLongClickListener = onItemLongClickListener;
     }
 
-    public void remove(int nota) {
-        notas.remove(nota);
-        notifyDataSetChanged();
+    public void remove(int posicao) {
+        notas.remove(posicao);
+
+        //Adiciona efeito de transição/animação ao remover item da lista
+        notifyItemRemoved(posicao);
     }
 
     public void troca(int posicaoInicial, int posicaoFinal) {
         Collections.swap(notas, posicaoInicial, posicaoFinal);
-        notifyDataSetChanged();
+
+        //Adiciona efeito de transição/animação ao mover item da lista
+        notifyItemMoved(posicaoInicial, posicaoFinal);
     }
 
     class NotaViewHolder extends RecyclerView.ViewHolder {
