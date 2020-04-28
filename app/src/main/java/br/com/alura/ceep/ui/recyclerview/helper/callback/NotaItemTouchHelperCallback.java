@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
 
+/*
+    Outras implementações de callback
+    https://cursos.alura.com.br/course/recyclerview-listeners-animacoes/task/36785
+ */
+
 public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private final ListaNotasAdapter adapter;
